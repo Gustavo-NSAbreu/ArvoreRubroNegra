@@ -31,39 +31,6 @@ class ArvoreRubroNegra():
         self.nulo.direita = None
         self.raiz = self.nulo
 
-    def pre_ordem_auxiliar(self, no):
-        """
-            Questão 5-b)
-            Este método possui a lógica que percore a árvore em pré-ordem
-        """
-
-        if no != self.nulo:
-            sys.stdout.write(str(no.valor) + " ")
-            self.pre_ordem_auxiliar(no.esquerda)
-            self.pre_ordem_auxiliar(no.direita)
-
-    def em_ordem_auxiliar(self, no):
-        """
-            Questão 5-c)
-            Este método possui a lógica que percore a árvore em em ordem simétrica
-        """
-
-        if no != self.nulo:
-            self.em_ordem_auxiliar(no.esquerda)
-            sys.stdout.write(str(no.valor) + " ")
-            self.em_ordem_auxiliar(no.direita)
-
-    def pos_ordem_auxiliar(self, no):
-        """
-            Questão 5-a)
-            Este método possui a lógica que percore a árvore em pos-ordem.
-        """
-
-        if no != self.nulo:
-            self.pos_ordem_auxiliar(no.esquerda)
-            self.pos_ordem_auxiliar(no.direita)
-            sys.stdout.write(str(no.valor) + " ")
-
     def ajustar_regras_deletar(self, x):
         """
             Este método ajusta a árvore de forma que as regras sejam atendidas
@@ -240,28 +207,6 @@ class ArvoreRubroNegra():
             self.mostrar_arvore_auxiliar(no.esquerda, indentacao, False)
             self.mostrar_arvore_auxiliar(no.direita, indentacao, True)
 
-    def pre_ordem(self):
-        """
-            Questão 5-a)
-            Este método percore a árvore em ordem simétrica.
-        """
-        self.pre_ordem_auxiliar(self.raiz)
-
-    def em_ordem(self):
-        """
-            Questão 5-a)
-            Este método percore a árvore em pre-ordem.
-        """
-        self.em_ordem_auxiliar(self.raiz)
-
-    def pos_ordem(self):
-        """
-            Questão 5-a)
-            Este método percore a árvore em pos-ordem.
-        """
-
-        self.pos_ordem_auxiliar(self.raiz)
-
     def minimo(self, no):
         """
             Retorna o menor valor na sub arvore, ou seja, o mais a esquerda
@@ -379,7 +324,7 @@ class ArvoreRubroNegra():
 
     def mostrar_largura(self):
         """
-            1)
+            Questão 1)
             Esta método mostra a largura da árvore
         """
 
@@ -401,8 +346,36 @@ class ArvoreRubroNegra():
 
         print(largura)
 
+    def altura_auxiliar(self, no):
+        """
+            Questão 2)
+            Este médoto possui a lógica utilizada para encontrar a altura da arvore.
+        """
+
+        # se o nó for None, retorna altura 0
+        if not no:
+            return 0
+
+        # calcula a altura da subárvore à esquerda
+        altura_esquerda = self.altura_auxiliar(no.esquerda)
+
+        # calcula a altura da subárvore à direita
+        altura_direita = self.altura_auxiliar(no.direita)
+
+        # retorna a maior altura + 1 (altura do nó atual)
+        return max(altura_esquerda, altura_direita) + 1
+
+    def altura(self):
+        """
+            Questão 2)
+            Este método mostra a altura da árvore, chamando o metodo altura_auxiliar().
+        """
+
+        print(self.altura_auxiliar(self.raiz))
+
     def esta_cheio_auxiliar(self, no):
         """
+            Questão 3)
             Este método possui a lógica para verificar se a árvore esa cheia.
         """
 
@@ -414,6 +387,7 @@ class ArvoreRubroNegra():
 
     def esta_cheio_primeiro_caso(self, no):
         """
+            Questão 3)
             Este método cobre a verificação da raiz.
         """
 
@@ -433,6 +407,7 @@ class ArvoreRubroNegra():
 
     def arvore_espelho_auxiliar(self, no):
         """
+            Questão 4)
             Este método possui a lógica para espelhar a arvore.
         """
 
@@ -455,30 +430,64 @@ class ArvoreRubroNegra():
 
         self.arvore_espelho_auxiliar(self.raiz)
 
-    def altura_auxiliar(self, no):
+
+    def pos_ordem_auxiliar(self, no):
         """
-        Este médoto possui a lógica utilizada para encontrar a altura da arvore.
-        """
-
-        # se o nó for None, retorna altura 0
-        if not no:
-            return 0
-
-        # calcula a altura da subárvore à esquerda
-        altura_esquerda = self.altura_auxiliar(no.esquerda)
-
-        # calcula a altura da subárvore à direita
-        altura_direita = self.altura_auxiliar(no.direita)
-
-        # retorna a maior altura + 1 (altura do nó atual)
-        return max(altura_esquerda, altura_direita) + 1
-
-    def altura(self):
-        """
-            Este método mostra a altura da árvore, chamando o metodo altura_auxiliar().
+            Questão 5-a)
+            Este método possui a lógica que percore a árvore em pos-ordem.
         """
 
-        print(self.altura_auxiliar(self.raiz))
+        if no != self.nulo:
+            self.pos_ordem_auxiliar(no.esquerda)
+            self.pos_ordem_auxiliar(no.direita)
+            sys.stdout.write(str(no.valor) + " ")
+
+    def pos_ordem(self):
+        """
+            Questão 5-a)
+            Este método percore a árvore em pos-ordem.
+        """
+
+        self.pos_ordem_auxiliar(self.raiz)
+
+
+    def pre_ordem_auxiliar(self, no):
+        """
+            Questão 5-b)
+            Este método possui a lógica que percore a árvore em pré-ordem
+        """
+
+        if no != self.nulo:
+            sys.stdout.write(str(no.valor) + " ")
+            self.pre_ordem_auxiliar(no.esquerda)
+            self.pre_ordem_auxiliar(no.direita)
+
+    def pre_ordem(self):
+        """
+            Questão 5-b)
+            Este método percore a árvore em ordem simétrica.
+        """
+        self.pre_ordem_auxiliar(self.raiz)
+
+
+    def em_ordem_auxiliar(self, no):
+        """
+            Questão 5-c)
+            Este método possui a lógica que percore a árvore em em ordem simétrica
+        """
+
+        if no != self.nulo:
+            self.em_ordem_auxiliar(no.esquerda)
+            sys.stdout.write(str(no.valor) + " ")
+            self.em_ordem_auxiliar(no.direita)
+
+    def em_ordem(self):
+        """
+            Questão 5-c)
+            Este método percore a árvore em pre-ordem.
+        """
+        self.em_ordem_auxiliar(self.raiz)
+
 
 if __name__ == "__main__":
     arn = ArvoreRubroNegra()
