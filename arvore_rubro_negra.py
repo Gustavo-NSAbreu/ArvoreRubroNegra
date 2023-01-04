@@ -346,7 +346,7 @@ class ArvoreRubroNegra():
 
         print(largura)
 
-    def altura_auxiliar(self, no):
+    def mostrar_profundidade_auxiliar(self, no):
         """
             Questão 2)
             Este médoto possui a lógica utilizada para encontrar a altura da arvore.
@@ -357,21 +357,21 @@ class ArvoreRubroNegra():
             return 0
 
         # calcula a altura da subárvore à esquerda
-        altura_esquerda = self.altura_auxiliar(no.esquerda)
+        altura_esquerda = self.mostrar_profundidade_auxiliar(no.esquerda)
 
         # calcula a altura da subárvore à direita
-        altura_direita = self.altura_auxiliar(no.direita)
+        altura_direita = self.mostrar_profundidade_auxiliar(no.direita)
 
         # retorna a maior altura + 1 (altura do nó atual)
         return max(altura_esquerda, altura_direita) + 1
 
-    def altura(self):
+    def mostrar_profundidade(self):
         """
             Questão 2)
-            Este método mostra a altura da árvore, chamando o metodo altura_auxiliar().
+            Este método mostra a altura da árvore, chamando o metodo mostrar_profundidade_auxiliar().
         """
 
-        print(self.altura_auxiliar(self.raiz))
+        print(self.mostrar_profundidade_auxiliar(self.raiz))
 
     def esta_cheio_auxiliar(self, no):
         """
@@ -491,23 +491,16 @@ class ArvoreRubroNegra():
 
 if __name__ == "__main__":
     arn = ArvoreRubroNegra()
-
-    arn.inserir(1)
-
+# 50, 35, 2, 12, 98, 76, 45, 101 e 22
+    arn.inserir(50)
+    arn.inserir(35)
     arn.inserir(2)
-
-    arn.inserir(3)
-
-    arn.inserir(4)
-
-    arn.inserir(5)
-
-    arn.inserir(6)
-
-    arn.inserir(7)
-    arn.inserir(8)
-    arn.inserir(9)
-    arn.inserir(10)
+    arn.inserir(12)
+    arn.inserir(98)
+    arn.inserir(76)
+    arn.inserir(45)
+    arn.inserir(101)
+    arn.inserir(22)
 
 
     # arn.deletar_no(1)
@@ -517,13 +510,13 @@ if __name__ == "__main__":
     # arn.mostrar_arvore()
     # arn.mostrar_largura()
 
-    print(arn.esta_completo())
+    # print(arn.esta_completo())
 
     # arn.arvore_espelho()
     # arn.mostrar_arvore()
 
     # arn.mostrar_largura()
 
-    # arn.altura()
+    # arn.mostrar_profundidade()
 
-    arn.em_ordem()
+    # arn.em_ordem()
